@@ -1,0 +1,26 @@
+job_name: trip-archive-2026
+
+db:
+  url: postgresql+psycopg://migration:migration@localhost:5432/file_migration
+
+downloader:
+  provider: opendrive
+  source_folder_id: "0"
+  api_key: ${OPENDRIVE_API_KEY}
+  api_secret: ${OPENDRIVE_API_SECRET}
+
+uploader:
+  provider: google_photos
+  oauth_client_id: ${GOOGLE_OAUTH_CLIENT_ID}
+  oauth_client_secret: ${GOOGLE_OAUTH_CLIENT_SECRET}
+  album_name: Imported Album
+
+# download-only mode:
+# uploader:
+#   provider: noop
+
+intermediate_steps:
+  - noop_step_1
+  - noop_step_2
+
+workspace_dir: .cache/file-migration

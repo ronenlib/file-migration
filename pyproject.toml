@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "file-migration"
+version = "1.0.0"
+description = "Generic, state-aware file migration CLI"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "SQLAlchemy>=2.0",
+  "psycopg[binary]>=3.1",
+  "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "black>=25.0",
+  "isort>=5.13",
+  "pytest>=8.0",
+  "mypy>=1.19.1",
+]
+
+[project.scripts]
+file-migration = "file_migration.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+exclude = '^\.venv/'
+python_version = "3.11"
+
+[[tool.mypy.overrides]]
+module = ["yaml"]
+ignore_missing_imports = true

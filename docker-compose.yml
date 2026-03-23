@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: file-migration-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: file_migration
+      POSTGRES_USER: migration
+      POSTGRES_PASSWORD: migration
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
